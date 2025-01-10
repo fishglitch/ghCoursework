@@ -1,0 +1,86 @@
+body {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+}
+
+.header {
+  justify-content: center;
+  display: flex;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* to center this p below h1, I had to specify the attribute within the p element */
+p {
+  font-style: italic;
+  text-align: center;
+}
+
+/* container containing child is color-less (white)*/
+.container {
+  background-color: white;
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* makes all sections with div child tag have colored boxes */
+.child {
+  background-color: #eeeeff;
+  border: 3px solid #d8bfd8;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 50px;
+}
+
+.child2 {
+  background-color: #eeeeff;
+  border: 3px solid #d8bfd8;
+  max-width: 50%;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.h2backgroundcolor {
+  background-color: #f6fbd3;
+}
+
+img {
+  width: 350px;
+  height: 250px;
+}
+
+.insidechild {
+  width: 100px;
+  height: 100px;
+}
+h1 {
+  color: #6f7ae8;
+  text-decoration: none;
+  font-size: 35px;
+}
+
+h2 {
+  padding-left: 40px;
+  padding-top: 10px;
+}
+
+h3 {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* If I want borders I need to declare their attributes here */
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+  margin: 20px;
+}

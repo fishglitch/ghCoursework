@@ -1,0 +1,117 @@
+html, body {
+  height: 100vmin;
+  margin: 0;
+  overflow: hidden; /*ensures every shape fits within screen w/o scrolling */
+}
+
+body {
+  display: flex;
+  justify-content: center; /* ctr horizontally */
+  align-items: center; /* ctr vertically */
+  background-color: #630d1d; /* bg color */
+  flex-direction: column; /* stacks the form below circle */
+
+}
+
+.circle {
+  width: 60vh;
+  height: 60vh;
+  border-radius: 50%;
+  background-color: rgb(51, 43, 158);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* offset and size adjustments for largest circle */
+.planet {
+  position: absolute;
+  width: 200vh;
+  height: 100vh;
+  bottom: 0; /* 0 brings to bottom */
+  background: linear-gradient(to right, rgba(51, 43, 158, 0.8), rgba(127, 121, 211, 0.8));
+  border-radius: 50%; /* rounds the shapes*/
+}
+
+/* offset and size adjustments for the most left circle */
+.planet2 {
+  width: 50%;
+  height: 80%;
+  left: 50%;
+  margin-left: -50%;
+  transform: translateY(10%); /*brings the shape a little off screen bottom */
+  background: linear-gradient(to right, rgba(51, 43, 158, 0.7), rgba(119, 123, 18, 0.7));
+}
+
+.planet3 {
+  width: 500%;
+  height: 80%;
+  left: 50%;
+  margin-left: -50%;
+  background: linear-gradient(to right, rgba(52, 151, 151, 0.6), rgba(127, 121, 211, 0.6));
+}
+
+/* .wave {
+  position: absolute;
+  bottom: 0; 
+  width: 100%; 
+  height: 100%; 
+} */
+
+.title {
+  font-family: Trattatello, fantasy;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2; 
+  position: relative; 
+}
+
+form {
+  display: flex;
+  flex-direction: column; /* vertical stack */
+  align-items: center; 
+  padding: 10px;
+  z-index: 2; 
+  position: relative; 
+}
+
+.form-group {
+  margin: 5px 0; /* space between form fields */
+  width: 100%; /* full width for text */
+  display: flex; /* centers submit button*/
+  justify-content: center;
+}
+
+input[type=text],
+input[type=email],
+input[type=submit]{
+  font-family: Trattatello, fantasy;
+  padding: 10px;
+  border: none; 
+  border-radius: 5px;
+  text-align: center;
+  
+}
+
+input[type=submit] {
+  background-color: rgb(127, 121, 211);
+  color: white; 
+  cursor: pointer; /* pointer on hover */
+  
+}
+
+input[type=submit]:hover {
+  background-color: rgb(51, 43, 158); /* change color on hover */
+}
+
+#confirmed {
+  text-align: center;
+  margin: 30px;
+  background-color: rgb(127, 121, 211);
+  color: white;
+  padding: 20px;
+  border-radius: 20px;
+  font-family: Trattatello, fantasy;
+}
