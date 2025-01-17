@@ -56,6 +56,16 @@ async function deleteParty(id) {
               "Content-Type": "application/json",
             },
           });
+/* this portion helped fix the following bug:
+Initially encountered catch error alert (line 79)~ due to json parsing error upon "click" of Delete button
+Have had to refresh the page to see that the item was deleted, with no errors
+*/
+          if(promise.status === 204) {
+            console.log("Successfully deleted party ID:", id);
+            await getParties();
+            renderParties();
+            return;
+          }
           
           const response = await promise.json();
           console.log("delete response:", response);
