@@ -1,55 +1,163 @@
-const COHORT = '2409-GHP-ET-WEB-PT';
-const BASE_URL = 'https://fsa-crud-2aa9294fe819.herokuapp.com/api/' + COHORT;
+const COHORT = "2409-GHP-ET-WEB-PT";
+const API_URL = "https://fsa-crud-2aa9294fe819.herokuapp.com/api/" + COHORT;
 
 // === State ===
 
 const state = {
-    parties: [],
-  };
+  parties: [],
+};
 
 /* === Updates state with parties from API === */
-// TODO
 
-async function getParties(){
-
-    const response = await fetch(API_URL);
-
-    // try{
-    //     const promise = await fetch(API_URL);
-    //     const response = await promise.json();
-    //     if (!response.success){
-    //         throw response.error;
-    //     }
-    //     console.log(response.data);
-    //     state.parties = response.data;
-    // } catch (error){
-    //     alert("Cannot Load Party");
-    // }
+async function getParties() {
+  try {
+    const promise = await fetch(`${API_URL}/events`);
+    const response = await promise.json();
+    if (!response.success) {
+      throw response.error;
+    }
+    console.log(response.data);
+    state.parties = response.data;
+  } catch (error) {
+    alert("Cannot Load Party");
+  }
 }
-/* === Asks the API to create a new party based on the given `party` === */
-// TODO
-async function getParties(){
-    
+
+/* === Add a New Party === 
+Asks the API to create a new party based on the given `party` === 
+*/
+
+async function addParty(party) {
+  try {
+    const promise = await fetch(`${API_URL}/events`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(party),
+    });
+    const response = await promise.json();
+    console.log(response);
+    render();
+  } catch (error) {
+    alert("cannot add event; http error");
+  }
 }
 
 /* === Delete path ===
 - ask the API to delete the given party
 - calling API with delete method
 */
-// TODO
+async function deleteParty(id) {
+    try {
+        const promise = await fetch(`${API_URL}/events/${id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          
+          const response = await promise.json();
+          console.log("delete response:", response);
 
-/* === Renders parties from state === */
-// TODO
-function renderParties() {
-    const ul = document.getElementById("parties");
-    state.parties.forEach((party) => {
+          if(!response.success){
+            throw new Error("cannot delete error" + response.error)
+          }
+          console.log("successfully deleted, good job");
+          await getParties();
+          renderParties();
+    } catch (error){
+        alert ("cannot delete event; http error");
+        console.error("error", error);
+    }
 
-        
-    });
 }
 
-/* === Syncs state with the API and rerender === */
-// TODO: Add party with form data when the form is submitted
+
+
+
+// === Render ===
+/* === Renders parties from state === */
+
+function renderParties() {
+  const ul = document.getElementById("parties");
+  ul.innerHTML = "";
+  state.parties.forEach((party) => {
+    const li = document.createElement("li");
+    const div = document.createElement("div");
+
+    // display party name
+    const h1 = document.createElement("h1");
+    h1.textContent = party.name;
+    div.appendChild(h1);
+
+    // display party date
+    const date = document.createElement("p");
+    date.textContent = `${new Date(party.date).toLocaleDateString()}`;
+    div.appendChild(date);
+
+    // display party location
+    const location = document.createElement("p");
+    location.textContent = `${party.location}`;
+    div.appendChild(location);
+
+    // display party description
+    const description = document.createElement("p");
+    description.textContent = `${party.description}`;
+    div.appendChild(description);
+
+    // create and append delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.id = party.id;
+    deleteButton.textContent = "Delete!";
+    deleteButton.addEventListener("click", () => {
+        console.log("deleting party with id:", party.id); // debug
+      deleteParty(party.id);
+    });
+    div.appendChild(deleteButton);
+    li.appendChild(div);
+    ul.appendChild(li);
+  });
+}
+
+/** Syncs state with the API and rerender
+ * Add party with form data when the form is submitted
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
+ */
+
+// Convert to a Date object if needed
+
+const form = document.getElementById("addParty");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const formData = new FormData(form);
+
+  //   const name = formData.get("partyName");
+  //   const eventDate = formData.get("partyEventDate");
+  //   const location = formData.get("partyLocation");
+  //   const description = formData.get("partyDescription");
+
+
+  const eventDate = new Date(form.partyEventDate.value).toISOString();
+  const party = {
+    name: form.partyName.value,
+    date: eventDate, //.toISOString()
+    location: form.partyLocation.value,
+    description: form.partyDescription.value,
+  };
+  console.log(party);
+  await addParty(party);
+
+  console.log("submitted a party, thank you");
+});
+
+async function render() {
+  await getParties();
+  renderParties();
+
+  getParties(); // you are invoking the function here
+}
 
 /* === Script === */
-// render();
+render();
