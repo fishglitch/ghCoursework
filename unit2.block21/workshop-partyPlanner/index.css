@@ -1,0 +1,39 @@
+/* CSS to stack labels and inputs */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px; /* adjust width as needed */
+}
+label {
+  margin-bottom: 15px; /* Spacing between each label/input pair */
+}
+input {
+  width: 100%; /* input takes full container width*/
+  padding: 8px; /* Padding inside input*/
+  box-sizing: border-box; /* padding in total width */
+}
+button {
+  padding: 10px; /*button Padding*/
+  cursor: pointer; /* Changes cursor to indicate button is clickable */
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-auto-rows: 25rem;
+  gap: 1ch;
+}
+
+li {
+  border: 1px solid black;
+  padding: 1rem;
+
+  overflow-y: auto;
+}
+
+img {
+  max-width: 100%;
+}
