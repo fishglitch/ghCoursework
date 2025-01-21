@@ -42,6 +42,7 @@ await is only used inside an async function
 
 // ultra nested callBack function AKA CHAINING
 
+/*
 const carmelizeOnions = () =>{
     getOnions("pantry", (onions) =>{
         chopOnions(onions, (choppedOnions) => {
@@ -62,6 +63,7 @@ const carmelizeOnions = async () => {
         console.log("carmelizing onions!")
     }
 }
+    */
 
 /*
 "I will have onions once I get onions from the pantry (await),
@@ -73,6 +75,7 @@ more succinct and easier to read
 
 // try/catch
 
+/*
 try {
     tryStatements //try
 } catch (exceptionVar) {
@@ -95,6 +98,7 @@ const carmelizeOnions = async()=>{
         console.error(error.message);
     }
 };
+*/ 
 
 /* === APIs ===
 code we don't own, someone else has written it

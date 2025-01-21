@@ -28,22 +28,22 @@ line 15 <form> input id="number" will render in numberBankArray[] through a func
 */
 
 const state = {
-    numberBankArray: [],
-    oddsArray: [],
-    evensArray: [],
+  numberBankArray: [],
+  oddsArray: [],
+  evensArray: [],
 };
 
 // Step 2: === DOM elements ===
 
-// line 15 
-const number = document.getElementById('number')
+// line 15
+const number = document.getElementById("number");
 // line 22
-const numberBankOutput = document.querySelector('#numberBank output')
+const numberBankOutput = document.querySelector("#numberBank output");
 // line 32
-const oddsOutput = document.querySelector('#odds output')
+const oddsOutput = document.querySelector("#odds output");
 // line 36
-const evensOutput = document.querySelector('#evens output')
-
+const evensOutput = document.querySelector("#evens output");
+const form = document.querySelector("form");
 
 /* Step 3: === Functionalities of the application === 
 
@@ -53,9 +53,17 @@ const evensOutput = document.querySelector('#evens output')
     render() it so it shows up on the web page 
 */
 function addNumberToBank(numberToPush) {
-    state.numberBankArray.push(numberToPush)
-    console.log("current state:", state)
-    render();
+
+  if (!isNaN(numberToPush)) {
+    // only push number if valid
+  } else {
+    console.warn(
+      `${numberToPush} is not a valid number, will not be added sry`
+    );
+  }
+  state.numberBankArray.push(numberToPush);
+  console.log("current state:", state);
+  render();
 }
 
 /*
@@ -64,12 +72,12 @@ when the event "submit" in <form> takes place, line 15 input "number" as a value
     pushed through  addNumberBank() (line 55 above).
     we use parseInt() method inside the invoked function so the value is a number, not a string.
 */
-const form = document.querySelector('form')
-form.addEventListener('submit', function(event){
-    event.preventDefault(); // this is standard when clicking 
-    console.log(number.value)
-    // "invoke the function" means, run the code inside the function (below)
-    addNumberToBank(parseInt(number.value))
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault(); // this is standard when clicking
+  console.log(number.value);
+  // "invoke the function" means, run the code inside the function (below)
+  addNumberToBank(parseInt(number.value));
 });
 
 /*
@@ -78,24 +86,23 @@ sortOneNumberOnly() moves the first number from the numberBank
 */
 
 function sortfirstNumOnly() {
-    const firstNumber = state.numberBankArray.shift()
-    console.log("first num:", firstNumber)
-    if (firstNumber % 2 === 0){
-        state.evensArray.push(firstNumber)
-    }
-    else {
-        state.oddsArray.push(firstNumber)
-    }
-    render();
+  const firstNumber = state.numberBankArray.shift();
+  console.log("first num:", firstNumber);
+  if (firstNumber % 2 === 0) {
+    state.evensArray.push(firstNumber);
+  } else {
+    state.oddsArray.push(firstNumber);
+  }
+  render();
 }
 
-const sortOneButton = document.querySelector('#sortOne')
-sortOneButton.addEventListener('click', function(event){
-    console.log(number.value)
-    // don't forget to invoke function sortfirstNumOnly()!!!
-    // so that the event handler triggers the function
-    // because this button is not within a form, we don't need preventDefault.
-    sortfirstNumOnly()
+const sortOneButton = document.querySelector("#sortOne");
+sortOneButton.addEventListener("click", function (event) {
+  console.log(number.value);
+  // don't forget to invoke function sortfirstNumOnly()!!!
+  // so that the event handler triggers the function
+  // because this button is not within a form, we don't need preventDefault.
+  sortfirstNumOnly();
 });
 
 /*
@@ -104,38 +111,34 @@ sortOneNumberOnly() moves all number from the numberBank
 */
 
 function sortAllNumbers() {
-    // create a while loop
-    
-    while (state.numberBankArray.length > 0) {
-        const firstNumber = state.numberBankArray.shift();
-        console.log(firstNumber)
-        // keep boolean login WITHIN the while loop so firstNumber is defined.
-        if (firstNumber % 2 === 0){
-            state.evensArray.push(firstNumber)
-        }
-        else {
-            state.oddsArray.push(firstNumber)
-        }
-    }
+  // create a while loop
 
-    render();
+  while (state.numberBankArray.length > 0) {
+    const firstNumber = state.numberBankArray.shift();
+    console.log(firstNumber);
+    // keep boolean login WITHIN the while loop so firstNumber is defined.
+    if (firstNumber % 2 === 0) {
+      state.evensArray.push(firstNumber);
+    } else {
+      state.oddsArray.push(firstNumber);
+    }
+  }
+
+  render();
 }
 
-const sortAllButton = document.querySelector('#sortAll')
-sortAllButton.addEventListener('click', function(event){
-    console.log(number.value)
-    sortAllNumbers()
+const sortAllButton = document.querySelector("#sortAll");
+sortAllButton.addEventListener("click", function (event) {
+  console.log(number.value);
+  sortAllNumbers();
 });
-
 
 /*
 for render(); to work inside function addToNumberBank, we need to make function render()
 Use DOM property .textcontent so state.numberBank renders on page.
 */
 function render() {
-    numberBankOutput.textContent = state.numberBankArray;
-    evensOutput.textContent = state.evensArray;
-    oddsOutput.textContent = state.oddsArray;
+  numberBankOutput.textContent = state.numberBankArray;
+  evensOutput.textContent = state.evensArray;
+  oddsOutput.textContent = state.oddsArray;
 }
-
-

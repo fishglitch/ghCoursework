@@ -83,53 +83,70 @@ Have had to refresh the page to see that the item was deleted, with no errors
 
 }
 
-
-
-
 // === Render ===
-/* === Renders parties from state === */
 
+/*  == renderParties() written using TEMPLATE LITERALS == old code below:
+old code:
+// function renderParties() {
+//   const ul = document.getElementById("parties");
+//   ul.innerHTML = "";
+//   state.parties.forEach((party) => {
+//     const li = document.createElement("li");
+//     const div = document.createElement("div");
+
+//     // display party name
+//     const h1 = document.createElement("h1");
+//     h1.textContent = party.name;
+//     div.appendChild(h1);
+
+//     // display party date
+//     const date = document.createElement("p");
+//     date.textContent = `${new Date(party.date).toLocaleDateString()}`;
+//     div.appendChild(date);
+
+//     // display party location
+//     const location = document.createElement("p");
+//     location.textContent = `${party.location}`;
+//     div.appendChild(location);
+
+//     // display party description
+//     const description = document.createElement("p");
+//     description.textContent = `${party.description}`;
+//     div.appendChild(description);
+
+//     // create and append delete button
+//     const deleteButton = document.createElement("button");
+//     deleteButton.id = party.id;
+//     deleteButton.textContent = "Delete!";
+//     deleteButton.addEventListener("click", () => {
+//         console.log("deleting party with id:", party.id); // debug
+//       deleteParty(party.id);
+//     });
+//     div.appendChild(deleteButton);
+//     li.appendChild(div);
+//     ul.appendChild(li);
+//   });
+// }
+*/
 function renderParties() {
   const ul = document.getElementById("parties");
-  ul.innerHTML = "";
-  state.parties.forEach((party) => {
-    const li = document.createElement("li");
-    const div = document.createElement("div");
+  ul.innerHTML = ""; // Clear existing content
 
-    // display party name
-    const h1 = document.createElement("h1");
-    h1.textContent = party.name;
-    div.appendChild(h1);
+  const partiesHtml = state.parties.map(party => `
+    <li>
+      <div>
+        <h1>${party.name}</h1>
+        <p>${new Date(party.date).toLocaleDateString()}</p>
+        <p>${party.location}</p>
+        <p>${party.description}</p>
+        <button id="${party.id}" onclick="deleteParty(${party.id})">Delete!</button>
+      </div>
+    </li>
+  `).join(""); // Join the array into a string
 
-    // display party date
-    const date = document.createElement("p");
-    date.textContent = `${new Date(party.date).toLocaleDateString()}`;
-    div.appendChild(date);
+  ul.innerHTML = partiesHtml; // Set the inner HTML of the UL
 
-    // display party location
-    const location = document.createElement("p");
-    location.textContent = `${party.location}`;
-    div.appendChild(location);
-
-    // display party description
-    const description = document.createElement("p");
-    description.textContent = `${party.description}`;
-    div.appendChild(description);
-
-    // create and append delete button
-    const deleteButton = document.createElement("button");
-    deleteButton.id = party.id;
-    deleteButton.textContent = "Delete!";
-    deleteButton.addEventListener("click", () => {
-        console.log("deleting party with id:", party.id); // debug
-      deleteParty(party.id);
-    });
-    div.appendChild(deleteButton);
-    li.appendChild(div);
-    ul.appendChild(li);
-  });
 }
-
 /** Syncs state with the API and rerender
  * Add party with form data when the form is submitted
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
