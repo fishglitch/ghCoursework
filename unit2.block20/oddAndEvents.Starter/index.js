@@ -62,7 +62,7 @@ function addNumberToBank(numberToPush) {
     );
   }
   state.numberBankArray.push(numberToPush);
-  console.log("current state:", state);
+//   console.log("current state:", state);
   render();
 }
 
@@ -75,7 +75,7 @@ when the event "submit" in <form> takes place, line 15 input "number" as a value
 
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // this is standard when clicking
-  console.log(number.value);
+//   console.log(number.value);
   // "invoke the function" means, run the code inside the function (below)
   addNumberToBank(parseInt(number.value));
 });
@@ -87,7 +87,7 @@ sortOneNumberOnly() moves the first number from the numberBank
 
 function sortfirstNumOnly() {
   const firstNumber = state.numberBankArray.shift();
-  console.log("first num:", firstNumber);
+//   console.log("first num:", firstNumber);
   if (firstNumber % 2 === 0) {
     state.evensArray.push(firstNumber);
   } else {
@@ -98,7 +98,7 @@ function sortfirstNumOnly() {
 
 const sortOneButton = document.querySelector("#sortOne");
 sortOneButton.addEventListener("click", function (event) {
-  console.log(number.value);
+//   console.log(number.value);
   // don't forget to invoke function sortfirstNumOnly()!!!
   // so that the event handler triggers the function
   // because this button is not within a form, we don't need preventDefault.
@@ -115,7 +115,7 @@ function sortAllNumbers() {
 
   while (state.numberBankArray.length > 0) {
     const firstNumber = state.numberBankArray.shift();
-    console.log(firstNumber);
+    // console.log(firstNumber);
     // keep boolean login WITHIN the while loop so firstNumber is defined.
     if (firstNumber % 2 === 0) {
       state.evensArray.push(firstNumber);
@@ -129,7 +129,7 @@ function sortAllNumbers() {
 
 const sortAllButton = document.querySelector("#sortAll");
 sortAllButton.addEventListener("click", function (event) {
-  console.log(number.value);
+//   console.log(number.value);
   sortAllNumbers();
 });
 
