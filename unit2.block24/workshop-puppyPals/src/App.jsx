@@ -7,7 +7,7 @@ function App() {
   const [featPupId, setFeatPupId] = useState(null);
   console.log(puppies);
   const featuredPup = puppies.find((pup)=> pup.id === featPupId);
-  console.log(featuredPup)
+  console.log(featuredPup);
 
   return (
 
