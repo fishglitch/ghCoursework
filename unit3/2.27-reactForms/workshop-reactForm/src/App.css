@@ -5,12 +5,45 @@
   text-align: center;
 }
 
-.app-container {
+.sign-up-form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.component-container {
+.form-field-username {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.form-field-username:hover {
+  background-color: aliceblue;
+  font-weight: bold;
+  color: rgb(0, 2, 3); 
+}
+
+.form-field-password {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   margin-bottom: 16px;
+}
+
+.form-field-password:hover {
+  background-color: aliceblue;
+  font-weight: bold;
+  color: rgb(0, 2, 3); 
+}
+
+.submit-button:hover {
+  background-color: aliceblue;
+  color: rgb(0, 2, 3); 
+
+}
+
+.authenticate-button:hover {
+  background-color: aliceblue;
+  color: rgb(0, 2, 3); 
+
 }
