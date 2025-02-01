@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
       <SignUpForm setToken={setToken} />
-      <Authenticate token={token} />
+      <Authenticate token={token} setToken={setToken} />
     </>
   );
 }
