@@ -1,7 +1,7 @@
 // import
 import { useState } from "react";
 
-export default function SignUpForm({setToken}) {
+export default function SignUpForm({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -11,58 +11,60 @@ export default function SignUpForm({setToken}) {
     console.log();
 
     try {
-        const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: username, // changed this from strings with Javier to instead pass the defined variables
-                password: password // these values show up on console.log(result);
-            })
-        });
-
-        // console.log(username, password)
-        const result = await response.json();
-        console.log(result); // shows inputted username and pw
-
-        // Authenticate Component Tab step 5: 
-        // "use this function in our handleSubmit. Pass the token property of our API response to setToken."
-
-        setToken(result.token);
-
-
-    } catch (error) {
-          setError(error.message);
-      }
-    }
-    return (
-        <>
-          <h2>Sign Up!</h2>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Username:{" "}
-              <input
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </label>
-            <label>
-              Password:{" "}
-              <input type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-            <button type="submit">Submit</button>
-          </form>
-          {error && <p style= {{color: 'red'}}>{error}</p>} 
-
-        </>
-        // react fragment, an invisible div (parent)
+      const response = await fetch(
+        "https://fsa-jwt-practice.herokuapp.com/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username, // changed this from strings with Javier to instead pass the defined variables
+            password: password, // these values show up on console.log(result);
+          }),
+        }
       );
 
-  };
+      // console.log(username, password)
+      const result = await response.json();
+      console.log(result); // shows inputted username and pw
+
+      // Authenticate Component Tab step 5:
+      // "use this function in our handleSubmit. Pass the token property of our API response to setToken."
+
+      setToken(result.token);
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+  return (
+    <>
+      <div>
+        <h2>Sign Up!</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Username:{" "}
+            <input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </label>
+          <label>
+            Password:{" "}
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </div>
+    </>
+    // react fragment, an invisible div (parent)
+  );
+}
 // {error && <p style= {{color: 'red'}}>{error}</p>} for error msg
 
 /* notes with Kathryn, Javier
@@ -75,7 +77,7 @@ JS Local vs Global Scope
 define useState() within export default function, bc react is functional scope
 
 */
-// 
+//
 
 //
 // vanilla js can take in global

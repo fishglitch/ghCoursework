@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Authenticate({token, setToken}) {
+export default function Authenticate({ token, setToken }) {
   // states here
 
   const [successMessage, setSuccessMessage] = useState(null);
@@ -9,44 +9,43 @@ export default function Authenticate({token, setToken}) {
 
   // function here with try catch
 
-  async function handleClick(event){
+  async function handleClick(event) {
     event.preventDefault();
     console.log();
 
     try {
-      const response = await fetch("https://fsa-jwt-practice.herokuapp.com/authenticate", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-
-      });
+      const response = await fetch(
+        "https://fsa-jwt-practice.herokuapp.com/authenticate",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await response.json();
       console.log(data);
       setSuccessMessage(data.message);
       setToken(data.token);
-
     } catch (error) {
       setError(error.message);
     }
   }
 
-
-
   return (
-// If successMessage is a truthy value 
-// (not null, undefined, 0, false, '', or NaN), 
-// the expression will render a <p> element with the value of successMessage inside it.
-// same logic for setting up conditional rendering for error variable
-<>
-      <h2>Authenticate!</h2>
-      <button onClick={handleClick}> Authenticate Token </button>
-      {successMessage && <p>{successMessage}</p>}
-      {error && <p>{error}</p>}
-  
-
+    // If successMessage is a truthy value
+    // (not null, undefined, 0, false, '', or NaN),
+    // the expression will render a <p> element with the value of successMessage inside it.
+    // same logic for setting up conditional rendering for error variable
+    <>
+      <div>
+        <h2>Authenticate!</h2>
+        <button onClick={handleClick}> Authenticate Token </button>
+        {successMessage && <p>{successMessage}</p>}
+        {error && <p>{error}</p>}
+      </div>
     </>
   );
 }
