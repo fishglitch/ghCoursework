@@ -29,7 +29,7 @@
 
 // imports
 import { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import AllPlayers from "./components/AllPlayers";
 import NewPlayerForm from "./components/NewPlayerForm";
@@ -43,6 +43,7 @@ const API_URL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}`;
 export default function App() {
   const [players, setPlayers] = useState([]); // fetchAllPlayers orig was: players: [] why useState([])?
   const [selectedPlayer, setSelectedPlayer] = useState(null); //fetchSinglePlayer
+  const navigate = useNavigate();
   // do I need a teams[]?
   // const [loading, setLoading] = useState(true); need to understand where this is from
 
@@ -73,10 +74,12 @@ export default function App() {
         body: JSON.stringify(playerObj),
       });
       if (!response.ok) {
-        throw new Error("can't add player", error);
+        const result = await response.json();
+        console.error("Error details:", JSON.stringify(error));
+        throw new Error(`Can't add player: ${result.error || "Unknown error"}`);
       }
+
       await fetchAllPlayers();
-      renderAllPlayers(players); // check if we need this
     } catch (error) {
       console.error("Oops, can't add player", error);
     }
@@ -85,14 +88,30 @@ export default function App() {
   // 2c. **async: FETCH SINGLE PLAYER FROM API**
   const fetchSinglePlayer = async (playerId) => {
     try {
-      const promise = await fetch(API_URL + "/players/" + playerId, {
+      // should i use const result instead of const promise? Yes.
+      // this was creating console.error(can't fetch) when clicking Player Details btn
+      // no need for const promise
+      // bc fetch itself returns a Promise that you are awaiting.
+      // The value returned by await fetch() is directly stored in response.
+      const response = await fetch(`${API_URL}/players/${playerId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const reponse = await promise.json();
-      setSelectedPlayer(response.data.selectedPlayer);
+      const result = await response.json(); // should i use await result instead?
+      
+      if (!response.ok) {
+        throw new Error("can't fetch player!!");
+      }
+      // due to changes above,
+      // change promise.json to response.json
+      // instead of const response, use const result here
+      
+      setSelectedPlayer(result.data.selectedPlayer);
+      navigate(`/${playerId}`); 
+      // this navigates to individual player page http://localhost:5173/22213
+      // but it is currently blank!
     } catch (error) {
       console.error(`oops, can't fetch player #${playerId}`, error);
     }
@@ -107,6 +126,10 @@ export default function App() {
           "Content-Type": "application/json",
         },
       });
+      if (!response.ok) {
+        throw new Error("something happened can't delete player!");
+      }
+      await fetchAllPlayers(); //refresh players after deletion
     } catch (error) {
       console.error(`can't remove player #${playerId}`, error);
     }
@@ -124,20 +147,37 @@ export default function App() {
     <>
       <div>
         <h1>Puppy Bowl</h1>
-        <NewPlayerForm addNewPlayer={addNewPlayer}/>
-        <AllPlayers 
-        players={setPlayers}
-        selectedPlayer={setSelectedPlayer}
-        fetchSinglePlayer={fetchSinglePlayer}
-        removePlayer={removePlayer}
-         />
+        {/* This is redundant here, 
+        since we have this listed in Route Link 
+        <AllPlayers
+          players={players}
+          selectedPlayer={setSelectedPlayer}
+          fetchSinglePlayer={fetchSinglePlayer}
+          removePlayer={removePlayer}
+        /> */}
       </div>
       <div>
         <Navigation />
         <Routes>
-          <Route path="/" element={<AllPlayers />} />
-          <Route path="/:id" element={<SinglePlayer />} />
-          <Route path="/add-player" element={<NewPlayerForm />} />
+          <Route
+            path="/"
+            element={
+              <AllPlayers
+                players={players}
+                selectedPlayer={setSelectedPlayer}
+                fetchSinglePlayer={fetchSinglePlayer}
+                removePlayer={removePlayer}
+              />
+            }
+          />
+          <Route path="/:id" element={
+            <SinglePlayer 
+            setSelectedPlayer={setSelectedPlayer}
+            />} />
+          <Route
+            path="/add-player"
+            element={<NewPlayerForm addNewPlayer={addNewPlayer} />}
+          />
         </Routes>
       </div>
     </>
