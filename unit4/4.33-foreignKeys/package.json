@@ -1,0 +1,20 @@
+{
+  "name": "4.33-foreignkeys",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node turtleServer",
+    "start:dev": "nodemon turtleServer"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.3"
+  }
+}
