@@ -4,11 +4,6 @@ const client = new pg.Client(
   "postgres://calbee:fish70@localhost:5432/acme_dining_db"
 );
 
-const getCustomers = async () => {
-    const SQL = `SELECT* FROM customers`;
-    const result = await client.query(SQL);
-    return result.rows[0];
-}
 
 const createCustomer = async (customerName) => {
   // create a function that accepts the customer inside the database
@@ -17,47 +12,60 @@ const createCustomer = async (customerName) => {
   return result.rows[0];
 };
 
-
-
 const createRestaurant = async (restaurantName) => {
   const SQL = `INSERT INTO restaurants(id, name) VALUES($1, $2) RETURNING*`;
   const result = await client.query(SQL, [uuid.v4(), restaurantName]);
   return result.rows[0];
 };
 
-const createReservation = async (
-  customerName,
-  restaurantName,
-  date,
-  party_count
-) => {
-  const SQL = `
-  INSERT INTO reservations 
-    (id, date, party_count, restaurant_id, customer_id) 
-    VALUES($1, $2, $3, 
-        (SELECT id FROM restaurants WHERE name =$4), 
-        (SELECT id FROM customers WHERE name =$5)) 
-    RETURNING*`;
-  const result = await client.query(SQL, [
-    uuid.v4(),
-    date,
-    party_count,
-    restaurantName,
-    customerName,
-  ]);
-  return result.rows[0];
+const fetchCustomers = async () => {
+    const SQL = `SELECT * FROM customers`; T
+    const result = await client.query(SQL);
+    return result.rows; // Return all customers, not just the first row
 };
 
-// CREATE TABLE reservations(
-//     id UUID PRIMARY KEY,
-//     date DATE NOT NULL,
-//     party_count INTEGER NOT NULL,
-//     restaurant_id UUID REFERENCES restaurants(id) NOT NULL,
-//     customer_id UUID REFERENCES customers(id) NOT NULL
+// fetchRestaurants: A method that returns an array of restaurants from the database.
+const fetchRestaurants = async () => {
+    const SQL = `SELECT * FROM restaurants`;
+    const result = await client.query(SQL);
+    return result.rows;
+};
+
+// createReservation: A method that creates a reservation in the database and then returns the created record.
+const createReservation = async (
+    customerName,
+    restaurantName,
+    date,
+    party_count
+  ) => {
+    const SQL = `
+    INSERT INTO reservations 
+      (id, date, party_count, restaurant_id, customer_id) 
+      VALUES($1, $2, $3, 
+          (SELECT id FROM restaurants WHERE name =$4), 
+          (SELECT id FROM customers WHERE name =$5)) 
+      RETURNING*`;
+    const result = await client.query(SQL, [
+      uuid.v4(),
+      date,
+      party_count,
+      restaurantName,
+      customerName,
+    ]);
+    return result.rows[0];
+  };
+
+// destroyReservation: A method that deletes a reservation from the database.
+
+
+
+
 
 const init = async () => {
   await client.connect();
 
+  // reservations is the child, customer and restaurants are parents
+  // parent drop only matters if one is a parent to the other.
   const SQL = `
     DROP TABLE IF EXISTS reservations;
     DROP TABLE IF EXISTS customers;
@@ -82,6 +90,7 @@ const init = async () => {
     );`;
 
   await client.query(SQL);
+
   ["Bob", "Jan", "Jerry"].forEach(async (name) => {
     await createCustomer(name);
     console.log("customer created" + name);
@@ -101,5 +110,7 @@ module.exports = {
   createCustomer,
   createRestaurant,
   createReservation,
-  getCustomers
+  fetchCustomers,
+  fetchRestaurants,
+
 };
