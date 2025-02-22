@@ -1,0 +1,16 @@
+{
+  "name": "unit2.puppybowl.core.starter",
+  "version": "1.0.0",
+  "description": "Starter code for PuppyBowl",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "dependencies": {
+    "punycode": "^2.3.1"
+  }
+}

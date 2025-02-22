@@ -1,0 +1,123 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+* {
+  font-family: monospace;
+  font-weight: 400;
+}
+
+.header {
+  padding: 1vw;
+}
+
+h1 {
+  text-align: left;
+  color: rgb(16, 16, 16);
+}
+
+body {
+  margin: 20px 5%; /* to be responsive */
+  background-image: url('https://happywall-img-gallery.imgix.net/60780/pastel_color_paw_prints_with_white_background_masked.jpg'), linear-gradient(
+    rgb(155, 221, 245),
+    white,
+    rgb(155, 221, 245)
+  );
+
+  background-size: auto; /* auto, cover, or contain */
+  background-position: center; 
+}
+
+div {
+  background-color: rgb(255, 242, 198);
+  border-radius: 40px;
+  padding: 3vw;
+  display: flex; /* button positioning */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: space-between; /* Space out children */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+/* Change background color and enlarge on hover */
+div:hover {
+  background-color: rgb(255, 220, 180); /* Change to the desired hover color */
+  transform: scale(1.05); /* Slightly enlarge the div */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3px;
+  margin-bottom: 15px;
+  width: 100%; /* 100% for responsiveness */
+}
+
+form input {
+  margin-bottom: 7px;
+}
+
+form input,
+form label,
+form button {
+  width: 100%;
+  max-width: 400px; /* Added max-width for better usability */
+}
+
+/* buttons vertically stacked */
+button {
+  display: block; /* button takes up full width */
+  margin: 5px 0; /* space between */
+}
+
+/* style the button container */
+.buttonContainer {
+  display: flex;
+  flex-direction: column;  /* Align buttons in a column */
+  gap: 10px;               /* Space between */
+}
+
+article {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  gap: 30px;
+  margin: 0 auto; /* Center content */
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgb(98, 100, 215);
+  background-color:  rgb(255, 242, 198);
+  border-radius: 10px;
+  width: 100%; /* for responsiveness */
+  max-width: 300px; /* to ensure sections don't stretch too much */
+  padding: 10px;
+  margin: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto; /* Ensures images maintain aspect ratio */
+  border-radius: 20%;
+  margin: auto; /* Centers the image */
+  padding: 10px; /* Less padding to fit the design */
+}
+
+/* === Media query ===
+responsiveness on smaller screens */
+@media (max-width: 600px) {
+  body {
+    margin: 10px; /* Reduced margin on smaller screens */
+  }
+
+  section {
+    width: 100%; /* full width on small screens */
+    max-width: none; /* Removes max-width on small screens */
+  }
+}
