@@ -5,6 +5,26 @@ const client = new pg.Client(
 );
 
 
+const fetchCustomers = async () => {
+  const SQL = `SELECT * FROM customers`;
+  const result = await client.query(SQL);
+  return result.rows; // Return all customers, not just the first row
+};
+
+// fetchRestaurants: A method that returns an array of restaurants from the database.
+const fetchRestaurants = async () => {
+  const SQL = `SELECT * FROM restaurants`;
+  const result = await client.query(SQL);
+  return result.rows;
+};
+
+// fetchReservations -- having trouble with API call for delete, created this to fetch all reservations
+const fetchReservations = async () => {
+  const SQL = `SELECT * FROM reservations`;
+  const result = await client.query(SQL);
+  return result.rows; // Return all reservations, not just the first row
+};
+
 const createCustomer = async (customerName) => {
   // create a function that accepts the customer inside the database
   const SQL = `INSERT INTO customers(id, name) VALUES($1, $2) RETURNING*`;
@@ -18,21 +38,9 @@ const createRestaurant = async (restaurantName) => {
   return result.rows[0];
 };
 
-const fetchCustomers = async () => {
-    const SQL = `SELECT * FROM customers`; T
-    const result = await client.query(SQL);
-    return result.rows; // Return all customers, not just the first row
-};
-
-// fetchRestaurants: A method that returns an array of restaurants from the database.
-const fetchRestaurants = async () => {
-    const SQL = `SELECT * FROM restaurants`;
-    const result = await client.query(SQL);
-    return result.rows;
-};
-
 // createReservation: A method that creates a reservation in the database and then returns the created record.
 const createReservation = async (
+    customer_id,
     customerName,
     restaurantName,
     date,
@@ -46,19 +54,28 @@ const createReservation = async (
           (SELECT id FROM customers WHERE name =$5)) 
       RETURNING*`;
     const result = await client.query(SQL, [
-      uuid.v4(),
+      uuid.v4(), // reservation ID
       date,
       party_count,
       restaurantName,
       customerName,
+      // customer_id
     ]);
     return result.rows[0];
   };
 
+
+
 // destroyReservation: A method that deletes a reservation from the database.
 
-
-
+const deleteReservation = async (deleteReservationId) => {
+  const SQL = `
+    DELETE FROM reservations
+    WHERE id = $1
+  `;
+  const response = await client.query(SQL, [deleteReservationId])
+  return response;
+}
 
 
 const init = async () => {
@@ -101,16 +118,18 @@ const init = async () => {
     console.log("restaurant created" + name);
   });
 
-  const reservation = await createReservation("Bob", "Nobu", "2025-02-14", 2);
-  console.log("reservation created:", reservation);
+  // const reservation = await createReservation("Bob", "Nobu", "2025-02-14", 2);
+  // console.log("reservation created:", reservation);
 };
 
 module.exports = {
   init,
+  fetchCustomers,
+  fetchRestaurants,
+  fetchReservations,
   createCustomer,
   createRestaurant,
   createReservation,
-  fetchCustomers,
-  fetchRestaurants,
+  deleteReservation
 
 };

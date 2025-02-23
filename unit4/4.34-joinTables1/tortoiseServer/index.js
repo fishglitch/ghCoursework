@@ -28,7 +28,6 @@ app.get("/api/restaurants", async (req, res, next) => {
 });
 
 // GET /api/reservations: Returns an array of reservations
-// how do I write this without a corresponding function in db.js?
 app.get("/api/reservations", async (req, res, next) => {
     try {
       const result = await db.fetchReservations();
@@ -49,15 +48,56 @@ app.post("/api/customers", async (req, res, next) => {
   }
 });
 
+app.post("/api/restaurant", async (req, res, next) => {
+  try {
+    const result = await db.createRestaurant(req.body.name);
+    res.send(result);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 // POST /api/customers/:id/reservations: 
 // Has an object containing a valid restaurant_id, date, and party_count 
 // as the payload, and returns the created reservation 
 // with a status code of 201.
 
+app.post("/api/customers/:id/reservations", async (req, res, next) => {
+  try {
+    const customer_id = req.params.id; 
+    const {restaurantName, date, party_count} = req.body;
+    const result = await db.createReservation(req.params.id, restaurantName, date, party_count);
+    res.status(201).send(result);
+    console.log("Your reservation:", result)
+  } catch (ex) {
+    next(ex);
+  }
+});
 
 // DELETE /api/customers/:customer_id/reservations/:id:  
 // In the URL, gets passed the id of the reservation to delete 
 // and the customer_id, and returns nothing with a status code of 204.
+
+app.delete("/api/customers/:customer_id/reservations/:id", async (req, res, next)=> {
+  try {
+    const deleteReservationId = req.params.id;
+
+    // check if reservation exists before deleting
+    const existingReservation = await db.fetchReservations();
+    const reservationExists = existingReservation.some(reservation => reservation.id === deleteReservationId);
+    
+    if(!reservationExists) {
+      return res.status(404).json({message: 'Reservation not found'});
+    }
+
+    await db.deleteReservation(deleteReservationId);
+    res.status(204).send();
+    console.log("deleted reservation", deleteReservationId)
+
+  } catch (ex) {
+    next (ex);
+  }
+});
 
 //As a bonus, an added error handling route that 
 // returns an object with an error property.
