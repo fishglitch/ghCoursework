@@ -27,8 +27,10 @@ app.get("/api/products", async (req, res, next) => {
 // returns the created favorite with a status code of 201.
 app.get("/api/users/:id/favorites", async (req, res, next) => {
   try {
-    const result = await db.fetchFavorites();
-    res.send(result);
+    const product_id = req.params.id;
+    const {username, productName} = req.body;
+    const result = await db.fetchFavorites(product_id, username, productName);
+    res.status(201).send(result);
   } catch (error) {
     next(error);
   }
