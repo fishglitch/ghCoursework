@@ -1,0 +1,20 @@
+{
+  "name": "4.35-jointables2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node snailServer",
+    "start:dev": "nodemon snailServer"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.3"
+  }
+}
