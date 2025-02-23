@@ -41,7 +41,7 @@ const createRestaurant = async (restaurantName) => {
 // createReservation: A method that creates a reservation in the database and then returns the created record.
 const createReservation = async (
     customer_id,
-    customerName,
+    // customerName,
     restaurantName,
     date,
     party_count
@@ -51,15 +51,16 @@ const createReservation = async (
       (id, date, party_count, restaurant_id, customer_id) 
       VALUES($1, $2, $3, 
           (SELECT id FROM restaurants WHERE name =$4), 
-          (SELECT id FROM customers WHERE name =$5)) 
+          $5
+          ) 
       RETURNING*`;
     const result = await client.query(SQL, [
       uuid.v4(), // reservation ID
       date,
       party_count,
       restaurantName,
-      customerName,
-      // customer_id
+      // customerName,
+      customer_id
     ]);
     return result.rows[0];
   };
@@ -108,15 +109,15 @@ const init = async () => {
 
   await client.query(SQL);
 
-  ["Bob", "Jan", "Jerry"].forEach(async (name) => {
-    await createCustomer(name);
-    console.log("customer created" + name);
-  });
+  // ["Bob", "Jan", "Jerry"].forEach(async (name) => {
+  //   await createCustomer(name);
+  //   console.log("customer created" + name);
+  // });
 
-  ["Nobu", "76", "Chili's"].forEach(async (name) => {
-    await createRestaurant(name);
-    console.log("restaurant created" + name);
-  });
+  // ["Nobu", "76", "Chili's"].forEach(async (name) => {
+  //   await createRestaurant(name);
+  //   console.log("restaurant created" + name);
+  // });
 
   // const reservation = await createReservation("Bob", "Nobu", "2025-02-14", 2);
   // console.log("reservation created:", reservation);

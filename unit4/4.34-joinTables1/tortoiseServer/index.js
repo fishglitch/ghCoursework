@@ -66,7 +66,7 @@ app.post("/api/customers/:id/reservations", async (req, res, next) => {
   try {
     const customer_id = req.params.id; 
     const {restaurantName, date, party_count} = req.body;
-    const result = await db.createReservation(req.params.id, restaurantName, date, party_count);
+    const result = await db.createReservation(customer_id, restaurantName, date, party_count);
     res.status(201).send(result);
     console.log("Your reservation:", result)
   } catch (ex) {
