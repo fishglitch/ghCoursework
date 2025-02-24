@@ -11,6 +11,7 @@ const {
   authenticate,
   findUserWithToken
 } = require('./db');
+
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -23,6 +24,8 @@ app.use('/assets', express.static(path.join(__dirname, '../client/dist/assets'))
 
 app.post('/api/auth/login', async(req, res, next)=> {
   try {
+    console.log("inside login");
+    console.log(req.body);
     res.send(await authenticate(req.body));
   }
   catch(ex){

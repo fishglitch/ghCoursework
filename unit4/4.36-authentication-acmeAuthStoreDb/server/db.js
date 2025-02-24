@@ -59,6 +59,10 @@ const destroyFavorite = async({ user_id, id })=> {
 };
 
 const authenticate = async({ username, password })=> {
+  console.log("inside authenticate");
+  console.log("username: " + username);
+
+
   const SQL = `
     SELECT id, username, password
     FROM users
@@ -67,11 +71,21 @@ const authenticate = async({ username, password })=> {
   const response = await client.query(SQL, [username]);
   console.log(response.rows[0]);
   if(!response.rows.length){
-    const error = Error('not authorized');
+    const error = Error('not authorized'); // if username and pw don't match
     error.status = 401;
     throw error;
   }
-  return { token: response.rows[0].id };
+  // const token = await jwt.sign({id: response.rows[0].id}, JWT);
+  // return { token: response.rows[0].id };
+
+  // const response = await client.query(SQL, [username]);
+  // console.log(response.rows[0]);
+  // if (!response.rows.length) {
+  //   const error = Error('not authorized');
+  //   error.status = 401;
+  //   throw error;
+  // }
+  // return{ token: response.rows[0].id };
 };
 
 const findUserWithToken = async(id)=> {
