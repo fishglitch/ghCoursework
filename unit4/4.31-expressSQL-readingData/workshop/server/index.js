@@ -5,7 +5,7 @@ const path = require("path");
 const pg = require("pg");
 
 // Create a pg client
-const client = new pg.Client('postgres://calbee:Fish70@localhost:5432/acme_hr_db');
+const client = new pg.Client('postgres://calbee:fish70@localhost:5432/acme_hr_db');
 
 // Make app deployable by enabling Express to serve the generated code that Vite builds
 // Middleware to serve static files

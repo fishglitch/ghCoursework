@@ -72,6 +72,7 @@ app.delete("/api/flavors/:id", async (req, res, next) => {
     const flavorId = req.params.id;
     const response = await client.query(SQL, [flavorId]);
     res.status(204).send();
+    console.log("deleted", req.body)
   } catch (ex) {
     next();
   }
@@ -91,6 +92,7 @@ app.put("/api/flavors/:id", async (req, res, next) => {
     const flavorId = req.params.id;
     const response = await client.query(SQL, [name, is_favorite, flavorId]);
     res.send(response.rows[0]);
+    console.log("updated", req.body)
   } catch (ex) {
     next();
   }

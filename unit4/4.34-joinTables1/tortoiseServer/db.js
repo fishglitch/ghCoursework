@@ -40,26 +40,36 @@ const createRestaurant = async (restaurantName) => {
 
 // createReservation: A method that creates a reservation in the database and then returns the created record.
 const createReservation = async (
+// The order of parameters must match the argument order 
+// when the function is called (e.g., in index.js).
     customer_id,
-    // customerName,
+    // customerName- no longer needed
     restaurantName,
     date,
     party_count
+
   ) => {
-    const SQL = `
-    INSERT INTO reservations 
+    const SQL = 
+  // The order of the arguments below must match 
+  // the positional placeholders in the SQL query.
+    `
+    INSERT INTO reservations
       (id, date, party_count, restaurant_id, customer_id) 
-      VALUES($1, $2, $3, 
+      VALUES(
+          $1,   
+          $2, 
+          $3, 
           (SELECT id FROM restaurants WHERE name =$4), 
           $5
           ) 
       RETURNING*`;
+
     const result = await client.query(SQL, [
       uuid.v4(), // reservation ID
       date,
       party_count,
       restaurantName,
-      // customerName,
+    // customerName- no longer needed
       customer_id
     ]);
     return result.rows[0];

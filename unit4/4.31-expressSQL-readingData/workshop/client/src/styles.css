@@ -1,7 +1,7 @@
 body {
   font-family: 'Times New Roman', Times, serif;
-  color: white;
-  background-color: blue;
+  color: rgb(220, 219, 144);
+  background-color: rgb(16, 16, 145);
 }
 
 .loading {
