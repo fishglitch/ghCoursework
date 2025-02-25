@@ -34,7 +34,7 @@ app.get("/api/favorites", async (req, res, next) => {
 // POST /api/users/:id/favorites:
 // Has a product_id as the payload, and
 // returns the created favorite with a status code of 201.
-app.get("/api/users/:user_id/favorites", async (req, res, next) => {
+app.post("/api/users/:user_id/favorites", async (req, res, next) => {
   try {
     const product_id = req.params.id;
     const {username, productName} = req.body;
@@ -42,6 +42,7 @@ app.get("/api/users/:user_id/favorites", async (req, res, next) => {
     res.status(201).send(result);
   } catch (error) {
     console.error(error);
+    next(error);
   }
 });
 

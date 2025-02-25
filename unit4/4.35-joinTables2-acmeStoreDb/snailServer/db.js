@@ -155,6 +155,7 @@ const init = async () => {
   // await createUser("frowningFrank", "password");
   await createUser("surferPaulene", "password");
   await createProduct("surf wax");
+  await createProduct("comb");
   await createFavorite("surferPaulene", "surf wax");
   
 // Fetch and log users
