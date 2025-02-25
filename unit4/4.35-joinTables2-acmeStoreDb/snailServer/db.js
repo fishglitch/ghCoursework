@@ -136,7 +136,7 @@ const fetchFavorites = async () => {
   return result.rows;
 };
 
-// destroyFavorite:
+// destroyFavorite: DELETE /api/users/:userId/favorites/:id
 // A method that deletes a favorite in the database.
 const destroyFavorite = async (deleteFavoriteId) => {
   const SQL = `

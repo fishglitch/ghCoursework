@@ -45,8 +45,8 @@ app.post("/api/users/:user_id/favorites", async (req, res, next) => {
     next(error);
   }
 });
-
-app.delete("/api/users/:id/favorites", async (req, res, next) => {
+// destroyFavorite: DELETE /api/users/:userId/favorites/:id
+app.delete("/api/users/:user_id/favorites/:id", async (req, res, next) => {
   try {
     const deleteFavoriteId = req.params.id;
 
