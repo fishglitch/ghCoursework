@@ -1,77 +1,105 @@
 # Unit 1 Assessment
 
 ## Table of Contents
-- [Overview](#overview)
-- [What is a Professional Journal?](#what-is-a-professional-journal)
-- [Best Practices](#best-practices)
-- [Using Your Journal](#using-your-journal)
-- [Your First Entry](#your-first-entry)
-- [References](#references)
+- [Live Demonstration](#live-demonstration)
+- [Project Overview](#project-overview)
+  - [Email from Calliope](#email-from-calliope)
+  - [Project Requirements](#project-requirements)
+- [Page Structure](#page-structure)
+  - [Home Page](#home-page)
+  - [About Page](#about-page)
+  - [Portfolio Page](#portfolio-page)
+- [Getting Started](#getting-started)
+- [Requirements](#requirements)
+- [Personal Website Part 1](#personal-website-part-1)
 
-## Overview
-This document outlines the importance of maintaining a professional journal as part of your development journey in the Fullstack program. Journaling can be a valuable tool for tracking your experiences, solutions, challenges, and future goals.
-
----
-
-## What is a Professional Journal?
-Journaling, whether it be personal or professional, is simply keeping track of your experiences, actions, and thoughts. A professional journal is a place to keep memorable notes, solutions to problems, and even future goals. Your journal can be unorganized and random, or structured and streamlined. Ultimately, it has to work for you and fit into your schedule!
-
-Journaling can be used to reprogram your thoughts into a growth mindset. Use it as a place to track your milestones or process any frustrations. Journaling can be leveraged as a tool for any professional, but is especially beneficial to those seeking a change in their career.
-
-The tech professional journal for this program is to support your development during your time at Fullstack, as well as throughout your career journey. It is a resource to track your performance and reflect. For example, you can use the journal to describe any of the following:
-- How you solved a problem
-- Challenges faced
-- Industry interests
-- Project contributions
-- How you resolved a team conflict
-- Justify reasons for making certain decisions about features
-- How you plan out
-- Strengths
-- How to improve a weakness
-- Workplace values
-- Experiences building your confidence
-
-While this helps you understand yourself as a developer, it can also help you become an effective job candidate for interview questions like, “What lesson did you learn working on this project?”
-
-These small day-to-day details can get lost in your memory and are hard to recall when put on the spot during an interview. By recording and reviewing them regularly, you can better prepare yourself to respond to these questions with meaningful and impactful responses.
+## Live Demonstration
+You can go to [Gustavo's Personal Site](#) to see a sample of what we are trying to build.
 
 ---
 
-## Best Practices
-Here are some tips for starting and sticking with professional journaling:
-- **Start small.** You don't have to write a book each day; one or two sentence entries are perfectly acceptable! 
-- **Make it a habit by being consistent.** Whether it be at the same time, day, or place, create a habit out of adding to and reviewing your journal. To strengthen commitment, add a calendar reminder or notification to focus.
-- **Feel comfortable using outlines** if full sentences don’t move you. Mind map, use shorthand, graphs, images, or draw your ideas to help transfer your thoughts.
-- **Don't lie to yourself!** Stay candid; no one is reading this but you.
-- **Include both positives and negatives.** Reflect on long and short term goals and record any progress made.
-- **Date all your entries.**
-- **Write without editing or revising.**
-- **Review and re-read your entries.**
+## Project Overview
+You have been recently hired at FullStack Solutions as a junior developer. Your project manager, Calliope, sends you the following email to welcome you to the team and provide details on your first assignment.
 
-Journaling looks different for everyone, so don't be afraid to experiment and make adjustments for what works best for you!
+### Email from Calliope
+> "Welcome to FullStack Solutions! We’re so happy you are joining our team. I’m Calliope, your team’s project manager. Fullstack Solutions is currently competing for several different contracts to build web apps, including corporate websites, startup proofs-of-concept, and enhancements to some portals for our local government. As part of the process, we are submitting brief bios and portfolios for each team member. Submit a GitHub link to your working repository in our ticket tracker before the end of the day, and let me know if you need any help or clarification!"
+
+Calliope has asked you to create a personal site with a brief bio. It is a chance to show off who you are, what you are about, and what you have accomplished. We will focus on three main areas: the landing page, an about page, and a portfolio page.
 
 ---
 
-## Using Your Journal
-Use your journal in the following ways:
-- Logging those random good ideas that come to you at inconvenient times.
-- Noting and reflecting on lessons learned from positive and negative experiences.
-- Record advice from mentors you are working with (Career Coaches, Instructors, etc.).
-- Set goals and plan for the future.
-- If attending events or watching content online, use the journal as a source to capture important ideas.
-- Making note of your contributions on the technical and interpersonal side within your team projects.
+## Project Requirements
+You will get the chance to revisit this project as we learn new techniques, so do not worry about perfecting it during your first pass. The goal here is to practice writing semantic HTML, basic CSS, and JavaScript. You must use a GitHub repository.
 
 ---
 
-## Your First Entry!
-Now that you have a document or notes app open, let's begin! Complete the following steps:
-1. Open up a word document using Google or Microsoft Word, or even a notes app on your phone.
-2. Put in today's date.
-3. Write 1-2 sentences reflecting on the Unit 1 Career Simulation: Personal Website Pt I.
+## Page Structure
+
+### Home Page 🏠
+The landing page is your first impression. You can include a photo, your mission statement, and something that defines you. In our example, we have included a quote.
+
+### About Page 👤
+An about page is a place for people to get to know you. You should include your interests and things you are good at, and in general, you should pull back enough of the curtain into your life to interest a potential employer in you as a person.
+
+### Portfolio Page 🖼️
+The portfolio page is the meat and potatoes of your personal site; here you want to include the projects you have worked on. For each project you wish to showcase, you should include:
+- The name of your project
+- A brief description
+- A screenshot
+- A link to where it lives on the web
+
+*Note: You can use Lorem Ipsum for placeholder content, but it would be great if you included actual content.*
 
 ---
 
-## References
-- [Forbes: 6 Ways Keeping a Journal Can Help Your Career](https://www.forbes.com/sites/ashirapettigrew/2020/11/16/6-ways-keeping-a-journal-can-help-your-career/)
-- [LinkedIn Blog: Career Journal Prompts to Inspire You](https://www.linkedin.com/pulse/career-journal-prompts-inspire-you-melissa-christenson/)
-- [Mind Tools Blog: Journaling for Professional Development](https://www.mindtools.com/pages/article/journaling.htm)
+## Getting Started
+1. Review all the tabs of this assignment.
+2. Review the rubric at the bottom of this page.
+3. In a GitHub repository, include more than one branch (including main/master) with descriptive branch names.
+4. Have more than one commit with descriptive commit messages.
+5. Include a descriptive README file.
+6. Create five functional files: `index.html`, `about.html`, `portfolio.html`, `style.css`, and `javascript.js`.
+
+
+Your folder structure should look like this:
+├── personal_site
+│   ├── index.html
+│   ├── about.html
+│   ├── portfolio.html
+│   ├── style.css
+│   ├── javascript.js
+
+## Requirements
+Make sure you have met all of the following requirements:
+- GitHub repository, with:
+  - More than one branch (including main/master), with descriptive branch name(s)
+  - More than one commit, with descriptive commit messages
+  - A descriptive README file
+- A functional website that fulfills the requirements, which includes:
+  - Three pages: home, about, work/portfolio
+  - A persistent header with links
+  - Personalized content, including both formatted text and images
+  - Basic CSS styling, included via an external file
+  - A call to `console.log` with the string "Hello World" loaded into all of the pages on your site as an external script.
+  
+HTML/CSS/JavaScript files submitted via a GitHub repository.
+
+---
+
+## Personal Website Part 1
+
+### Criteria Ratings
+| Criterion | Ratings | Points |
+|-----------|---------|--------|
+| GitHub: More than one branch (including main/master), with descriptive branch name(s) | 1 to >0.0 pts | Completed |
+| GitHub: More than one commit, with descriptive commit messages | 1 to >0.0 pts | Completed |
+| A descriptive README file | 1 to >0.0 pts | Completed |
+| Correct Syntax: The code for a functional website | 1 to >0.0 pts | Completed |
+| Three Pages: The website features at least three pages (Home, About, Work/Portfolio) | 1 to >0.0 pts | Completed |
+| Header Links: Persistent header with links | 1 to >0.0 pts | Completed |
+| Content: Personalized content, including both formatted text and images | 1 to >0.0 pts | Completed |
+| CSS Classes: Basic CSS styling, included via an external file | 1 to >0.0 pts | Completed |
+| JavaScript: A "Hello world" tier JavaScript routine, loaded via an external file | 1 to >0.0 pts | Completed |
+| Correct Files Submitted: The HTML/CSS/JavaScript files are compressed and submitted via a GitHub repository | 1 to >0.0 pts | Completed |
+
+**Total Points:** 10
