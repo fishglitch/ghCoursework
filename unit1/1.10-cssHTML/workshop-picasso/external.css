@@ -10,7 +10,6 @@ body {
   align-items: center; /* ctr vertically */
   background-color: #630d1d; /* bg color */
   flex-direction: column; /* stacks the form below circle */
-
 }
 
 .circle {
@@ -22,7 +21,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 
 /* offset and size adjustments for largest circle */
 .planet {
@@ -86,20 +84,18 @@ form {
 
 input[type=text],
 input[type=email],
-input[type=submit]{
+input[type=submit] {
   font-family: Trattatello, fantasy;
   padding: 10px;
   border: none; 
   border-radius: 5px;
   text-align: center;
-  
 }
 
 input[type=submit] {
   background-color: rgb(127, 121, 211);
   color: white; 
   cursor: pointer; /* pointer on hover */
-  
 }
 
 input[type=submit]:hover {
@@ -114,4 +110,40 @@ input[type=submit]:hover {
   padding: 20px;
   border-radius: 20px;
   font-family: Trattatello, fantasy;
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+  .circle {
+    width: 40vh; /* Smaller circle size for smaller screens */
+    height: 40vh;
+  }
+
+  .planet {
+    width: 150vh; /* Adjust size to fit smaller screens */
+  }
+
+  .planet2 {
+    width: 70%; /* Make the planet smaller */
+    height: 70%; /* Adjust height */
+  }
+
+  .planet3 {
+    width: 400%; /* Adjust size for smaller screens */
+  }
+
+  form {
+    padding: 5px; /* Less padding for smaller screens */
+  }
+
+  input[type=text],
+  input[type=email],
+  input[type=submit] {
+    font-size: 0.9rem; /* Slightly smaller text size */
+  }
+
+  #confirmed {
+    margin: 20px; /* Reduce margin for smaller screens */
+    padding: 15px; /* Reduce padding for smaller screens */
+  }
 }
