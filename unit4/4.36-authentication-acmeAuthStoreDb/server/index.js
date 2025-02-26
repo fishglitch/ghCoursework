@@ -98,7 +98,7 @@ app.post('/api/users/:id/favorites', isLoggedIn, async(req, res, next)=> {
       return res.status(403).send({error: 'Unauthorized access'})
     }
     res.status(201).send(await createFavorite({ user_id: req.params.id, product_id: req.body.product_id}));
-  }
+  } // bc this returns a json string, App.jsx can console.log json
   catch(ex){
     next(ex);
   }
@@ -107,7 +107,7 @@ app.post('/api/users/:id/favorites', isLoggedIn, async(req, res, next)=> {
 app.delete('/api/users/:user_id/favorites/:id', isLoggedIn, async(req, res, next)=> {
   try {
     await destroyFavorite({user_id: req.params.user_id, id: req.params.id });
-    res.sendStatus(204);
+    res.sendStatus(204); // this form of send status cannot use json
   }
   catch(ex){
     next(ex);

@@ -26,6 +26,7 @@ const Login = ({ login, register, errorMessage }) => {
         placeholder="password"
         onChange={(ev) => setPassword(ev.target.value)}
       />
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>} {/* Displaying error message */}
       <button
         onClick={(event) => eventRegister(event)}
         disabled={!username || !password}
@@ -167,11 +168,12 @@ function App() {
         Authorization: token, // Include the authorization token
       },
     });
-    const json = await response.json();
+    // const json = await response.json();
+    console.log("response", response);
     if (response.ok) {
       setFavorites(favorites.filter((favorite) => favorite.id !== id));
     } else {
-      console.log(json);
+      // console.log(json);
     }
   };
 
