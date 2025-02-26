@@ -1,30 +1,44 @@
-let userFlavors = prompt("Enter your order");
+// Function to count the frequency of each flavor in the array
+function countFlavors(flavorsArray) {
+    // Create an object to store the count of each flavor
+    const flavorCount = {};
 
-// enter  vanilla,vanilla,vanilla,strawberry,coffee,coffee
+    // Iterate through the array of flavors
+    flavorsArray.forEach(flavor => {
+        // Trim white space and convert to lowercase for consistency
+        flavor = flavor.trim().toLowerCase(); 
+
+        // If the flavor is already in the object, increment its count
+        // Otherwise, set its count to 1
+        if (flavorCount[flavor]) {
+            flavorCount[flavor]++;
+        } else {
+            flavorCount[flavor] = 1;
+        }
+    });
+
+    // Return the object containing flavor counts
+    return flavorCount;
+}
+
+// Prompt the user for froyo flavors
+let userFlavors = prompt("Enter your order (comma-separated, e.g., vanilla, strawberry, coffee)");
+
+// Check if there is input from the user
 if (userFlavors) {
-    // let flavorsArray = userFlavors.split(",")
-} 
-console.log(userFlavors)
+    // Split the user's input string into an array of strings
+    let flavorsArray = userFlavors.split(",");
 
- 
-console.table(userFlavors)
+    // Log the user's input to the console
+    console.log("User's Input:", userFlavors);
+    console.table(flavorsArray);
 
-// The user's input string is split into an array of strings.
+    // Call the function to count flavors and store the result
+    let flavorCounts = countFlavors(flavorsArray);
 
-let flavorsArray = userFlavors.split(",")
-
-console.table(flavorsArray)
-// A loop is used to iterate through the array of flavors
-
-flavorsArray.forEach(element => {
-    
-});
-
-// An object is used to keep count of how many orders there are of each flavor.
-
-// The program correctly counts the number of each flavor in the user's input.
-
-
-// The logic for counting the frequencies of elements in an array is organized into a function that returns an object.
-
-// Names are consistent and meaningful.
+    // Log the counts of each flavor to the console
+    console.log("Flavor Counts:", flavorCounts);
+    console.table(flavorCounts);
+} else {
+    console.log("No flavors were entered.");
+}
