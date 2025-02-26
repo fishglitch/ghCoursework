@@ -112,6 +112,7 @@ function App() {
     const json = await response.json();
     if (response.ok) {
       window.localStorage.setItem("token", json.token);
+      console.log('Token stored:', json.token); 
       setErrorMessage(""); // Clear any existing error messages
       attemptLoginWithToken();
     } else {
@@ -132,8 +133,10 @@ function App() {
     const json = await response.json();
     if (response.ok) {
       window.localStorage.setItem("token", json.token);
-      setErrorMessage(""); // Clear any existing error messages
-      attemptLoginWithToken();
+      console.log('Token stored after registration:', json.token);
+      // setErrorMessage(""); // Clear any existing error messages
+      // attemptLoginWithToken();
+      login(credentials); // Call login immediately with the same credentials to fetch user info
     } else {
       setErrorMessage(json.error || "Registration failed"); 
       console.log(json);

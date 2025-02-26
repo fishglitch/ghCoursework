@@ -65,11 +65,13 @@ app.post('/api/auth/register', async(req, res, next)=> {
   }
 });
 
-app.get('/api/auth/me', isLoggedIn, async(req, res, next)=> {
+app.get('/api/auth/me', isLoggedIn, async(req, res, next)=> { //requireToken
   try {
-    res.send(await findUserWithToken(req.headers.authorization));
+    const user = await findUserWithToken(req.headers.authorization);
+    res.send(user);
   }
   catch(ex){
+    res.status(ex.status || 500).send({error: ex.message});
     next(ex);
   }
 });
