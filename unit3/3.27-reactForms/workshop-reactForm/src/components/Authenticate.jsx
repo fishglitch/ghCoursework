@@ -11,7 +11,7 @@ export default function Authenticate({ token, setToken }) {
 
   async function handleClick(event) {
     event.preventDefault();
-    console.log();
+    // console.log();
 
     try {
       const response = await fetch(
@@ -26,7 +26,7 @@ export default function Authenticate({ token, setToken }) {
       );
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setSuccessMessage(data.message);
       setToken(data.token);
     } catch (error) {
