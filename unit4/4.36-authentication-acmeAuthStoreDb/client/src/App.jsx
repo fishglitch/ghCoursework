@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types'; // Import PropTypes
 
 const Login = ({ login, register, errorMessage }) => {
   const [username, setUsername] = useState("");
@@ -9,7 +10,7 @@ const Login = ({ login, register, errorMessage }) => {
     login({ username, password });
   };
 
-  
+
   const eventRegister = (ev) => {
     ev.preventDefault();
     register({ username, password });
@@ -218,5 +219,11 @@ function App() {
     </>
   );
 }
+// Add prop types validation
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+};
 
 export default App;
