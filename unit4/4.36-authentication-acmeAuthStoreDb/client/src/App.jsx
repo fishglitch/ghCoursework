@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Login = ({ login, register }) => {
+const Login = ({ login, register, errorMessage }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -46,6 +46,8 @@ function App() {
   const [auth, setAuth] = useState({});
   const [products, setProducts] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(""); // State for error messages
+
 
   useEffect(() => {
     attemptLoginWithToken();
@@ -80,7 +82,11 @@ function App() {
 
   useEffect(() => {
     const fetchFavorites = async () => {
-      const response = await fetch(`/api/users/${auth.id}/favorites`);
+      const token = window.localStorage.getItem("token");
+      const response = await fetch(`/api/users/${auth.id}/favorites`, {
+        headers: {
+          Authorization: token,
+      }});
       const json = await response.json();
       if (response.ok) {
         setFavorites(json);
@@ -105,8 +111,10 @@ function App() {
     const json = await response.json();
     if (response.ok) {
       window.localStorage.setItem("token", json.token);
+      setErrorMessage(""); // Clear any existing error messages
       attemptLoginWithToken();
     } else {
+      setErrorMessage(json.error || "Login failed");
       console.log(json);
     }
   };
@@ -123,18 +131,23 @@ function App() {
     const json = await response.json();
     if (response.ok) {
       window.localStorage.setItem("token", json.token);
+      setErrorMessage(""); // Clear any existing error messages
       attemptLoginWithToken();
     } else {
+      setErrorMessage(json.error || "Registration failed"); 
       console.log(json);
     }
   };
 
   const addFavorite = async (product_id) => {
+
+    const token = window.localStorage.getItem("token");
     const response = await fetch(`/api/users/${auth.id}/favorites`, {
       method: "POST",
       body: JSON.stringify({ product_id }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: token, // Ensure that the token is included in the headers
       },
     });
 
@@ -147,8 +160,12 @@ function App() {
   };
 
   const removeFavorite = async (id) => {
+    const token = window.localStorage.getItem("token");
     const response = await fetch(`/api/users/${auth.id}/favorites/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: token, // Include the authorization token
+      },
     });
     const json = await response.json();
     if (response.ok) {
@@ -166,7 +183,11 @@ function App() {
   return (
     <>
       {!auth.id ? (
-        <Login login={login} register={register} />
+        <
+        Login login={login} 
+        register={register} 
+        errorMessage={errorMessage}
+        />
       ) : (
         <button onClick={logout}>Logout {auth.username}</button>
       )}

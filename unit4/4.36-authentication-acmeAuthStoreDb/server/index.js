@@ -85,9 +85,6 @@ app.get('/api/users', async(req, res, next)=> {
 
 app.get('/api/users/:id/favorites', isLoggedIn, async(req, res, next)=> {
   try {
-    if (req.user.id !== req.params.id) {
-      return res.status(403).send({error: 'Unauthorized access'})
-    }
     res.send(await fetchFavorites(req.params.id));
   }
   catch(ex){
@@ -109,9 +106,6 @@ app.post('/api/users/:id/favorites', isLoggedIn, async(req, res, next)=> {
 
 app.delete('/api/users/:user_id/favorites/:id', isLoggedIn, async(req, res, next)=> {
   try {
-    if (req.user.id !== req.params.user_id) {
-      return res.status(403).send({ error: 'Unauthorized access' });
-    }
     await destroyFavorite({user_id: req.params.user_id, id: req.params.id });
     res.sendStatus(204);
   }
