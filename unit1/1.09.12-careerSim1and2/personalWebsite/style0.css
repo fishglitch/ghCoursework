@@ -1,0 +1,111 @@
+body {
+  font-family: "Courier New", monospace !important;
+  font-size: 16px;
+}
+
+/* NAVIGATION BAR */
+nav {
+  background-color: #f6fbd3;
+  overflow: hidden;
+}
+/* NAVIGATION BAR */
+.logoimg {
+  width: 50px;
+  height: 20px;
+  float: left;
+}
+/* NAVIGATION BAR */
+.logo {
+  float: left;
+}
+/* NAVIGATION BAR - Add a color to the active/current link */
+.active {
+  background-color: #e4c0e6;
+  color: black;
+}
+
+/* NAVIGATION BAR - Style the links inside the navigation bar */
+nav a {
+  float: right;
+  color: #7c68ef;
+  padding: 20px;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* NAVIGATION BAR - Change the color of links on hover */
+nav a:hover {
+  background-color: #e4c0e6;
+  color: #fffd78;
+}
+
+/* container containing child is color-less (white)
+formats the index page*/
+.container {
+  background-color: white;
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-top: 40px;
+  display: flex;
+  align-items: center;
+}
+
+/* makes all sections with div child tag have colored boxes */
+.child {
+  background-color: #eeeeff;
+  border: 3px solid #d8bfd8;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 40px;
+}
+
+/* to center this p below h1, I had to specify the attribute within the p element */
+p {
+  text-align: center;
+}
+
+p:hover { background-color: #f6fbd3; 
+}
+
+h1 {
+  color: #6f7ae8;
+  text-decoration: none;
+  font-size: 30px;
+  padding-left: 40px;
+}
+
+h1:hover { background-color: #f6fbd3; 
+}
+
+img {
+  width: 350px;
+  height: 250px;
+}
+
+
+
+h2 {
+  padding-left: 40px;
+  padding-top: 10px;
+}
+
+h2:hover {
+  background-color: #f6fbd3; 
+}
+
+h3 {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+h3:hover { background-color: #f6fbd3; 
+
+}
+
+form{
+  
+  padding-left: 40px;
+  padding-top: 40px;
+}

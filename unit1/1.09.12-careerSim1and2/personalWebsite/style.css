@@ -1,111 +1,202 @@
 body {
-  font-family: "Courier New", monospace !important;
-  font-size: 16px;
-}
-
-/* NAVIGATION BAR */
-nav {
-  background-color: #f6fbd3;
-  overflow: hidden;
-}
-/* NAVIGATION BAR */
-.logoimg {
-  width: 50px;
-  height: 20px;
-  float: left;
-}
-/* NAVIGATION BAR */
-.logo {
-  float: left;
-}
-/* NAVIGATION BAR - Add a color to the active/current link */
-.active {
-  background-color: #e4c0e6;
-  color: black;
-}
-
-/* NAVIGATION BAR - Style the links inside the navigation bar */
-nav a {
-  float: right;
-  color: #7c68ef;
-  padding: 20px;
-  text-decoration: none;
-  font-size: 25px;
-  font-weight: bold;
-}
-
-/* NAVIGATION BAR - Change the color of links on hover */
-nav a:hover {
-  background-color: #e4c0e6;
-  color: #fffd78;
-}
-
-/* container containing child is color-less (white)
-formats the index page*/
-.container {
-  background-color: white;
-  border: 1px solid white;
-  padding-left: 10px;
-  padding-right: 20px;
-  padding-top: 40px;
-  display: flex;
-  align-items: center;
-}
-
-/* makes all sections with div child tag have colored boxes */
-.child {
-  background-color: #eeeeff;
-  border: 3px solid #d8bfd8;
-  padding: 10px;
-  margin: 20px;
-  border-radius: 40px;
-}
-
-/* to center this p below h1, I had to specify the attribute within the p element */
-p {
-  text-align: center;
-}
-
-p:hover { background-color: #f6fbd3; 
-}
-
-h1 {
-  color: #6f7ae8;
-  text-decoration: none;
-  font-size: 30px;
-  padding-left: 40px;
-}
-
-h1:hover { background-color: #f6fbd3; 
-}
-
-img {
-  width: 350px;
-  height: 250px;
-}
-
-
-
-h2 {
-  padding-left: 40px;
-  padding-top: 10px;
-}
-
-h2:hover {
-  background-color: #f6fbd3; 
-}
-
-h3 {
-  text-transform: uppercase;
-  text-align: center;
-}
-
-h3:hover { background-color: #f6fbd3; 
-
-}
-
-form{
+    font-family: "Courier New", monospace !important;
+    font-size: 1rem; /* Changed to rem for better scalability */
+  }
   
-  padding-left: 40px;
-  padding-top: 40px;
+  /* NAVIGATION BAR */
+  nav {
+    background-color: #f6fbd3;
+    overflow: hidden;
+  }
+  
+  /* NAVIGATION BAR */
+  .logoimg {
+    width: 3.125rem; /* 50px in rem */
+    height: 1.25rem; /* 20px in rem */
+    float: left;
+  }
+  
+  /* NAVIGATION BAR */
+  .logo {
+    float: left;
+  }
+  
+  /* NAVIGATION BAR - Add a color to the active/current link */
+  .active {
+    background-color: #e4c0e6;
+    color: black;
+  }
+  
+  /* NAVIGATION BAR - Style the links inside the navigation bar */
+  nav a {
+    float: right;
+    color: #7c68ef;
+    padding: 1.25rem 1.5rem; /* Changed to rem for better consistency */
+    text-decoration: none;
+    font-size: 1.5625rem; /* 25px in rem */
+    font-weight: bold;
+  }
+  
+  /* NAVIGATION BAR - Change the color of links on hover */
+  nav a:hover {
+    background-color: #e4c0e6;
+    color: #fffd78;
+  }
+  
+  /* Container containing child is color-less (white) formats the index page */
+  .container {
+    background-color: white;
+    border: 1px solid white;
+    padding: 2.5rem 3.125rem 2.5rem 0; /* Changed to rem */
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Makes all sections with div child tag have colored boxes */
+  .child {
+    background-color: #eeeeff;
+    border: 3px solid #d8bfd8;
+    padding: 0.625rem; /* Changed to rem */
+    margin: 1.25rem; /* Changed to rem */
+    border-radius: 2.5rem; /* Changed to rem */
+  }
+  
+  /* To center this p below h1, I had to specify the attribute within the p element */
+  p {
+    text-align: center;
+  }
+  
+  p:hover {
+    background-color: #f6fbd3; 
+  }
+  
+  /* Headings styling */
+  h1 {
+    color: #6f7ae8;
+    text-decoration: none;
+    font-size: 1.875rem; /* 30px in rem */
+    padding-left: 2.5rem; /* Changed to rem */
+  }
+  
+  h1:hover {
+    background-color: #f6fbd3; 
+  }
+  
+  img {
+    width: 21.875rem; /* 350px in rem */
+    height: 15.625rem; /* 250px in rem */
+  }
+  
+  h2 {
+    padding-left: 2.5rem; /* Changed to rem */
+    padding-top: 0.625rem; /* Changed to rem */
+  }
+  
+  h2:hover {
+    background-color: #f6fbd3; 
+  }
+  
+  h3 {
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  h3:hover {
+    background-color: #f6fbd3; 
+  }
+  
+  form {
+    padding-left: 2.5rem; /* Changed to rem */
+    padding-top: 2.5rem; /* Changed to rem */
+  }
+  
+  /* Advanced selectors to enhance styles */
+  nav a:nth-child(odd) {
+    background-color: #f0f0f0; /* Gives odd links a different background */
+  }
+  
+  nav a:first-of-type {
+    border-left: 2px solid #7c68ef; /* Style the first link differently */
+  }
+  
+  .container > .child:last-child {
+    border-color: #6f7ae8; /* Color of the last child */
+  }
+  
+  h3::before {
+    content: "▶ "; /* Adds an arrow before h3 */
+  }
+  
+  h3:hover::before {
+    color: #ff6f00; /* Changes color on hover for the arrow */
+  }
+
+  /* Form Container */
+.form {
+  padding: 2rem; /* Consistent padding for the form */
+  background-color: #f6fbd3; /* Light background for contrast */
+  border-radius: 1rem; /* Rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  max-width: 600px; /* Max width for responsiveness */
+  margin: 2rem auto; /* Center the form with margin */
+}
+
+/* Form Labels */
+form label {
+  display: block; /* Block display for proper spacing */
+  margin-bottom: 0.5rem; /* Space before each label */
+  font-weight: bold; /* Make labels stand out */
+}
+
+/* Form Inputs and textarea */
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  width: 100%; /* Full width inputs */
+  padding: 0.75rem; /* Padding for better usability */
+  margin-bottom: 1rem; /* Space between inputs */
+  border: 2px solid #d8bfd8; /* Styled border */
+  border-radius: 0.5rem; /* Rounded edges */
+  font-size: 1rem; /* Consistent font size */
+  box-sizing: border-box; /* Include padding in width calculation */
+  transition: border-color 0.3s ease; /* Smooth transition */
+}
+
+/* Change border color on focus */
+form input:focus,
+form textarea:focus {
+  border-color: #7c68ef; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Button Styling */
+form button {
+  background-color: #7c68ef; /* Button background color */
+  color: white; /* Button text color */
+  padding: 0.75rem; /* Button padding */
+  border: none; /* Remove border */
+  border-radius: 0.5rem; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+  width: 100%; /* Full width button */
+}
+
+/* Change button color on hover */
+form button:hover {
+  background-color: #6f7ae8; /* Darker shade on hover */
+}
+
+/* Textarea */
+form textarea {
+  min-height: 150px; /* Minimum height for the textarea */
+  resize: vertical; /* Allow vertical resizing only */
+}
+
+/* Optional styling for error messages (if applicable) */
+.form-error {
+  color: red; /* Error message color */
+  font-size: 0.875rem; /* Font size for errors */
+  margin-top: -1rem; /* Position closer to the input */
+  margin-bottom: 1rem; /* Space after the error */
 }
