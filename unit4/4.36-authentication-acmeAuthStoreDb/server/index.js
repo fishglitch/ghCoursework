@@ -11,7 +11,6 @@ const {
   authenticate,
   findUserWithToken
 } = require('./db');
-
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -20,6 +19,29 @@ app.use(express.json());
 const path = require('path');
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '../client/dist/index.html')));
 app.use('/assets', express.static(path.join(__dirname, '../client/dist/assets'))); 
+
+// middleware to ensure a logged in user
+const isLoggedIn = async(req, res, next)=> {
+  const authHeader = req.headers.authorization;
+  
+  if (!authHeader) {
+    return next({status: 403, message: 'No authorization token provided'})
+  }
+  try { // try to find user by token
+    const user = await findUserWithToken(authHeader);
+
+    // if user not found, token is invalid
+    if (!user) {
+      return next({ status: 403, message: 'Invalid authorization token' });
+    }
+
+    req.user = user;
+    next();
+  }
+  catch(ex){
+    next(ex);
+  }
+};
 
 
 app.post('/api/auth/login', async(req, res, next)=> {
@@ -43,7 +65,7 @@ app.post('/api/auth/register', async(req, res, next)=> {
   }
 });
 
-app.get('/api/auth/me', async(req, res, next)=> {
+app.get('/api/auth/me', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await findUserWithToken(req.headers.authorization));
   }
@@ -61,8 +83,11 @@ app.get('/api/users', async(req, res, next)=> {
   }
 });
 
-app.get('/api/users/:id/favorites', async(req, res, next)=> {
+app.get('/api/users/:id/favorites', isLoggedIn, async(req, res, next)=> {
   try {
+    if (req.user.id !== req.params.id) {
+      return res.status(403).send({error: 'Unauthorized access'})
+    }
     res.send(await fetchFavorites(req.params.id));
   }
   catch(ex){
@@ -70,8 +95,11 @@ app.get('/api/users/:id/favorites', async(req, res, next)=> {
   }
 });
 
-app.post('/api/users/:id/favorites', async(req, res, next)=> {
+app.post('/api/users/:id/favorites', isLoggedIn, async(req, res, next)=> {
   try {
+    if (req.user.id !== req.params.id) {
+      return res.status(403).send({error: 'Unauthorized access'})
+    }
     res.status(201).send(await createFavorite({ user_id: req.params.id, product_id: req.body.product_id}));
   }
   catch(ex){
@@ -79,8 +107,11 @@ app.post('/api/users/:id/favorites', async(req, res, next)=> {
   }
 });
 
-app.delete('/api/users/:user_id/favorites/:id', async(req, res, next)=> {
+app.delete('/api/users/:user_id/favorites/:id', isLoggedIn, async(req, res, next)=> {
   try {
+    if (req.user.id !== req.params.user_id) {
+      return res.status(403).send({ error: 'Unauthorized access' });
+    }
     await destroyFavorite({user_id: req.params.user_id, id: req.params.id });
     res.sendStatus(204);
   }

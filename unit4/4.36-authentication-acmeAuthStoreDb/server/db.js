@@ -1,7 +1,13 @@
+
+ 
 const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL || 'postgres://calbee:fish70@localhost:5432/acme_auth_store_db');
 const uuid = require('uuid');
 const bcrypt = require('bcrypt');
+
+const jwt = require('jsonwebtoken');
+const JWT = process.env.JWT || 'shhh';
+
 
 const createTables = async()=> {
   const SQL = `
@@ -70,27 +76,31 @@ const authenticate = async({ username, password })=> {
   `;
   const response = await client.query(SQL, [username]);
   console.log(response.rows[0]);
-  if(!response.rows.length){
+  if(!response.rows.length || (await bcrypt.compare(password, response.rows[0].password))=== false){
     const error = Error('not authorized'); // if username and pw don't match
     error.status = 401;
     throw error;
   }
-  // const token = await jwt.sign({id: response.rows[0].id}, JWT);
-  // return { token: response.rows[0].id };
-
-  // const response = await client.query(SQL, [username]);
-  // console.log(response.rows[0]);
-  // if (!response.rows.length) {
-  //   const error = Error('not authorized');
-  //   error.status = 401;
-  //   throw error;
-  // }
-  // return{ token: response.rows[0].id };
+  const token = jwt.sign({id: response.rows[0].id}, JWT);
+  console.log(token);
+  return { token };
 };
 
-const findUserWithToken = async(id)=> {
+const findUserWithToken = async(token)=> {
+  let id;
+  try {
+    const payload = await jwt.verify(token,JWT);
+    id = payload.id;
+  } catch(ex){
+    const error = Error('not authorized'); 
+    error.status = 401;
+    throw error;
+  }
+
   const SQL = `
-    SELECT id, username FROM users WHERE id=$1;
+    SELECT id, username
+    FROM users
+    WHERE id=$1;
   `;
   const response = await client.query(SQL, [id]);
   if(!response.rows.length){
