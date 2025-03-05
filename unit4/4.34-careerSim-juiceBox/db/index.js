@@ -1,4 +1,7 @@
+require('dotenv').config();
 const { Client } = require('pg') // imports the pg module
+const bcrypt = require('bcrypt')
+const JWT_SECRET = process.env.JWT_SECRET|| 'shhh';
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL || 'postgres://localhost:5432/juicebox-dev',
@@ -351,6 +354,22 @@ async function getAllTags() {
     return { rows }
   } catch (error) {
     throw error;
+  }
+
+  async function destroyPost(id) {
+    console.log('destroy')
+    try {
+
+
+      await client.query(`
+      DELETE FROM posts WHERE id = $1
+    `, [id])
+    
+    return ('destroyed', response)
+    } catch (error) {
+      next(error)
+    }
+    
   }
 }
 

@@ -1,5 +1,32 @@
 # Block 34 - Juicebox
 
+# Career Simulation Project
+
+Welcome to the Career Simulation Project! This project focuses on repairing and enhancing an existing backend API using Express.js and PostgreSQL, alongside creating a frontend application.
+
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Getting Started](#getting-started)
+3. [Problems to Solve](#problems-to-solve)
+    - [Problem 1: Repair Database Schema](#problem-1-repair-database-schema)
+    - [Problem 2: Create a Middleware Function](#problem-2-create-a-middleware-function)
+    - [Problem 3: Repair an API Endpoint](#problem-3-repair-an-api-endpoint)
+    - [Problem 4: Create a New API Endpoint](#problem-4-create-a-new-api-endpoint)
+4. [Stretch Goal](#stretch-goal)
+5. [Tech Professional Journal](#tech-professional-journal)
+6. [Contributing](#contributing)
+7. [License](#license)
+
+## Introduction
+This project is aimed at simulating realistic challenges that backend developers face. You'll be improving an API, focusing on database interactions, middleware, and the overall endpoint integrity.
+
+## Getting Started
+To begin working on the project:
+1. Clone the GitHub repository.
+2. Install the required dependencies:
+   ```bash
+   npm install
+   
 ## Introduction
 
 In this assessment, you'll be provided with this GitHub repository containing details for a fully operational CRUD API that uses Express.js, PostgreSQL, and other technologies that you've been trained on. 

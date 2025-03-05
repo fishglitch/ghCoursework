@@ -98,7 +98,15 @@ postsRouter.patch('/:postId', requireUser, async (req, res, next) => {
 });
 
 postsRouter.delete('/:postId', requireUser, async (req, res, next) => {
-  res.send({ message: 'under construction' });
+  try {
+    await destroyPost(req.params.id);
+    res.sendStatus(204);
+
+  } catch (error) {
+    next(error);
+  }
+
+  
 });
 
 module.exports = postsRouter;
