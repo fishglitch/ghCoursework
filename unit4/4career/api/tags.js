@@ -1,3 +1,12 @@
+/*
+- defines the routes for handling tag-related API requests in an Express.js application
+- interacts w/ db via getAllTags, getPostsByTagName
+- retrieves tag data and posts related to specific tags
+- bridges gap between the database and the API endpoints
+- router modularly designed to handle requests related to tags. 
+- Each route defined within provides specific functionalities 
+that can be easily integrated into the main API by being mounted within the api/index.js file.
+*/
 const express = require('express');
 const tagsRouter = express.Router();
 

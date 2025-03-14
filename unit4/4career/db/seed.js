@@ -1,3 +1,24 @@
+/*
+Purpose: This file is used to set up the database 
+schema (tables and relationships) and to populate 
+the database with initial data for testing or development purposes.
+
+Functionality:
+- imports functions and the database client from index.js.
+- defines a set of functions:
+1. dropTables: Drops existing tables if they exist.
+2. createTables: Creates new tables (users, posts, tags, post_tags) in the database.
+3. createInitialUsers: Inserts initial user data into the users table.
+4. createInitialPosts: Inserts initial post data linked to the previously created users into the posts table.
+5. rebuildDB: Combines the above functions to reset the database and insert initial data.
+6. testDB: Performs a series of operations to test the functionality of the database methods available in index.js.
+
+index.js: encapsulates all database operations, acts as a reusable module for core database interaction functions, for data logic maintenance and management.
+seed.js: initialization and setup aspect; prepares db by creating schema + seeding it with initial data for functional and integration tests
+
+*/
+
+
 const {  
   client,
   createUser,
@@ -34,7 +55,8 @@ async function createTables() {
   try {
     console.log("Starting to build tables...");
 
-    await client.query(`
+    await client.query(
+      `
       CREATE TABLE users (
         id SERIAL PRIMARY KEY,
         username varchar(255) UNIQUE NOT NULL,
@@ -43,12 +65,12 @@ async function createTables() {
         location varchar(255) NOT NULL,
         active boolean DEFAULT true
       );
-
-      CREATE TABLE posts (
+       CREATE TABLE posts (
         id SERIAL PRIMARY KEY,
         "authorId" INTEGER REFERENCES users(id),
         title varchar(255) NOT NULL,
         content TEXT NOT NULL,
+        tags varchar(255),
         active BOOLEAN DEFAULT true
       );
 
@@ -62,12 +84,19 @@ async function createTables() {
         "postId" INTEGER REFERENCES posts(id),
         "tagId" INTEGER REFERENCES tags(id),
         UNIQUE ("postId", "tagId")
-      );
-    `);
+        );
+    `
+  );
+
+    // console.log("Executing SQL: ", query); // Debug log
+    /*
+         
+    */
+    // await client.query(query);
 
     console.log("Finished building tables!");
   } catch (error) {
-    console.error("Error building tables!");
+    console.error("Error building tables!", error); // added error
     throw error;
   }
 }
@@ -97,7 +126,7 @@ async function createInitialUsers() {
     
     console.log("Finished creating users!");
   } catch (error) {
-    console.error("Error creating users!");
+    console.error("Error creating users!", error);
     throw error;
   }
 }
@@ -136,7 +165,7 @@ async function createInitialPosts() {
 
 async function rebuildDB() {
   try {
-    client.connect();
+    await client.connect();
 
     await dropTables();
     await createTables();
@@ -145,6 +174,8 @@ async function rebuildDB() {
   } catch (error) {
     console.log("Error during rebuildDB")
     throw error;
+  } finally {
+    await client.end(); // close the connection
   }
 }
 
@@ -201,6 +232,6 @@ async function testDB() {
 
 
 rebuildDB()
-  .then(testDB)
-  .catch(console.error)
-  .finally(() => client.end());
+  // .then(testDB)
+  // .catch(console.error)
+  // .finally(() => client.end());

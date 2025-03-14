@@ -1,3 +1,11 @@
+/*
+This file is responsible for handling API requests and managing user authentication through JSON Web Tokens (JWT)
+serves as a central routing file for 
+- handling API requests, 
+- implementing authentication logic, 
+- serving as a hub for connecting specific user, post, and tag routes.
+*/
+
 // api/index.js
 const express = require('express');
 const apiRouter = express.Router();

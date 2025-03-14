@@ -1,3 +1,19 @@
+/*
+Purpose: This file primarily serves as a module containing 
+methods that handle database operations such as creating, 
+reading, updating, and deleting users, posts, and tags.
+
+Functionality:
+- establishes a connection to PostgreSQL database via pg module.
+- defines various functions to interact with the users, posts, and tags tables.
+- functions and methods for managing tags.
+- exports client & functions for use in other app parts incl. seed.js file.
+
+index.js: encapsulates all database operations, acts as a reusable module for core database interaction functions, for data logic maintenance and management.
+seed.js: initialization and setup aspect; prepares db by creating schema + seeding it with initial data for functional and integration tests
+*/
+
+
 require('dotenv').config();
 const { Client } = require('pg') // imports the pg module
 const bcrypt = require('bcrypt')
@@ -19,12 +35,15 @@ async function createUser({
   location
 }) {
   try {
-    const { rows: [ user ] } = await client.query(`
-      INSERT INTO users(username, password, name) 
-      VALUES($1, $2, $3) 
+    const { 
+      rows: [ user ] 
+    } = await client.query(
+      `
+      INSERT INTO users(username, password, name, location)
+      VALUES($1, $2, $3, $4) 
       ON CONFLICT (username) DO NOTHING 
       RETURNING *;
-    `, [username, password, name, location]);
+    `, [username, await bcrypt.hash(password, 10), name, location]); // add bcrypt
 
     return user;
   } catch (error) {
@@ -390,4 +409,5 @@ module.exports = {
   getAllTags,
   createPostTag,
   addTagsToPost
+  
 }
