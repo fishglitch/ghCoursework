@@ -87,7 +87,7 @@ usersRouter.post('/login', async (req, res, next) => {
   }
 });
 
-// CURRENTLY NOT WORKING POST http://localhost:3000/api/users/register
+// CURRENTLY NOT WORKING: POST http://localhost:3000/api/users/register
 usersRouter.post('/register', async (req, res, next) => {
   const { username, password, name, location } = req.body;
 
